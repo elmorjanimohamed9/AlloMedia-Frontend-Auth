@@ -1,5 +1,3 @@
-import React from 'react';
-
 const Loader = () => (
   <div className="screen_loader fixed inset-0 bg-[#020617] dark:bg-[#060818] z-[60] grid place-content-center animate__animated">
     <svg width="64" height="64" viewBox="0 0 135 135" xmlns="http://www.w3.org/2000/svg" fill="#f97316" aria-label="Loading">
