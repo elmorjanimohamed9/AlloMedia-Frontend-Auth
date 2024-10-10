@@ -1,11 +1,17 @@
 import { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { Eye, EyeOff, Lock } from "lucide-react";
+import { Toaster, toast } from "sonner";
+import { useAuth } from "../../contexts/AuthContext";
 
 const ResetPassword = () => {
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const { resetPassword, loading } = useAuth();
+  const navigate = useNavigate();
+  const { token } = useParams();
 
   const toggleNewPasswordVisibility = () => {
     setShowNewPassword(!showNewPassword);
@@ -15,18 +21,26 @@ const ResetPassword = () => {
     setShowConfirmPassword(!showConfirmPassword);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     if (newPassword !== confirmPassword) {
-      alert("Passwords do not match!");
+      toast.error("Passwords do not match!");
       return;
     }
-    // Add logic to reset password here
-    console.log("Password reset successfully");
+    try {
+      const response = await resetPassword(token, newPassword);
+      console.log("Reset password response:", response);
+      toast.success("Password reset successfully");
+      navigate("/auth/login");
+    } catch (error) {
+      console.error("Reset password error:", error);
+      toast.error(error.response?.data?.message || "Failed to reset password. Please try again.");
+    }
   };
 
   return (
     <div>
+      <Toaster richColors />
       <div className="absolute inset-0">
         <img
           src="/assets/images/auth/bg-gradient.png"
@@ -47,9 +61,14 @@ const ResetPassword = () => {
                   Enter your new password below
                 </p>
               </div>
-              <form onSubmit={handleSubmit} className="space-y-5 dark:text-white">
+              <form
+                onSubmit={handleSubmit}
+                className="space-y-5 dark:text-white"
+              >
                 <div>
-                  <label htmlFor="NewPassword" className="text-white-light">New Password</label>
+                  <label htmlFor="NewPassword" className="text-white-light">
+                    New Password
+                  </label>
                   <div className="relative text-white-dark">
                     <input
                       id="NewPassword"
@@ -67,12 +86,18 @@ const ResetPassword = () => {
                       className="absolute end-4 top-1/2 -translate-y-1/2"
                       onClick={toggleNewPasswordVisibility}
                     >
-                      {showNewPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                      {showNewPassword ? (
+                        <EyeOff size={20} />
+                      ) : (
+                        <Eye size={20} />
+                      )}
                     </button>
                   </div>
                 </div>
                 <div>
-                  <label htmlFor="ConfirmPassword" className="text-white-light">Confirm Password</label>
+                  <label htmlFor="ConfirmPassword" className="text-white-light">
+                    Confirm Password
+                  </label>
                   <div className="relative text-white-dark">
                     <input
                       id="ConfirmPassword"
@@ -90,7 +115,11 @@ const ResetPassword = () => {
                       className="absolute end-4 top-1/2 -translate-y-1/2"
                       onClick={toggleConfirmPasswordVisibility}
                     >
-                      {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                      {showConfirmPassword ? (
+                        <EyeOff size={20} />
+                      ) : (
+                        <Eye size={20} />
+                      )}
                     </button>
                   </div>
                 </div>

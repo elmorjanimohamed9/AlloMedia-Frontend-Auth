@@ -8,30 +8,65 @@ const AuthService = {
 
     login: async (userData) => {
         const response = await api.post('/auth/login', userData);
-        if (response.data.token) {
-            localStorage.setItem('user', JSON.stringify(response.data));
+        if (response.data.accessToken) {
+            localStorage.setItem('user', JSON.stringify(response.data.user));
+            localStorage.setItem('accessToken', response.data.accessToken);
+        }
+        if (response.data.requireOtp) {
+            localStorage.setItem('userId', response.data.userId);
+        }
+        return response;
+    },
+
+    forgotPassword: async (email) => {
+        return api.post('/auth/forget-password', { email });
+    },
+
+    resetPassword: async (token, newPassword) => {
+        try {
+          const response = await api.post('/auth/reset-password', { token, newPassword });
+          return response.data;
+        } catch (error) {
+          console.error("Error in resetPassword:", error.response || error);
+          throw error;
+        }
+    },
+
+    verifyEmail: async (token) => {
+        return api.get(`/auth/verify-email/${token}`);
+    },
+
+    verifyOtp: async (accessToken, otp) => {
+        console.log("OTP being sent to server:", otp);
+        return api.post('/auth/verify-otp', { otp }, {
+            headers: { Authorization: `Bearer ${accessToken}` }
+        });
+    },
+
+    resendOtp: async (accessToken) => {
+        return api.post('/auth/resend-otp', {}, {
+            headers: { Authorization: `Bearer ${accessToken}` }
+        });
+    },
+
+    refreshToken: async () => {
+        const response = await api.post('/auth/refresh-token');
+        if (response.data.accessToken) {
+            localStorage.setItem('accessToken', response.data.accessToken);
         }
         return response.data;
     },
 
-    forgotPassword: async (email) => {
-        return api.post('/auth/forgot-password', { email });
-    },
-
-    resetPassword: async (token, newPassword, confirmPassword) => {
-        return api.post('/auth/reset-password', { token, newPassword, confirmPassword });
-    },
-
-    verifyEmail: async (token) => {
-        return api.post('/auth/verify-email', { token });
-    },
-
-    VerifyOtp: async (otp) => {
-        return api.post('/auth/verify-otp', { otp });
-    },
-
-    logout: () => {
-        localStorage.removeItem('user');
+    logout: async () => {
+        try {
+            await api.post('/auth/logout');
+        } catch (error) {
+            console.error("Logout error:", error);
+        } finally {
+            localStorage.removeItem('user');
+            localStorage.removeItem('accessToken');
+            localStorage.removeItem('email');
+        }
     },
 };
 

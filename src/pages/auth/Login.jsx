@@ -1,20 +1,69 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import IconInstagram from "../../components/icons/IconInstagram";
 import IconX from "../../components/icons/IconX.jsx";
 import IconGoogle from "../../components/icons/IconGoogle";
 import IconFacebook from "../../components/icons/IconFacebook";
-import { useState } from "react";
-import { Eye, EyeOff, Mail, Lock } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Mail, Lock } from "lucide-react";
+import { Toaster, toast } from "sonner";
+import InputField from "../../components/InputField";
+import { useAuth } from "../../contexts/AuthContext";
 
 const Login = () => {
+  const { login, loading } = useAuth();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const queryParams = new URLSearchParams(location.search);
+    const verified = queryParams.get("verified");
+    const alreadyVerified = queryParams.get("alreadyVerified");
+
+    if (verified === "true") {
+      toast.success("Email verified successfully! You can now log in.");
+    } else if (alreadyVerified === "true") {
+      toast.info("Your email is already verified. Please log in.");
+    } else if (verified === "false") {
+      toast.error("Email verification failed. Please try again.");
+    }
+  }, [location]);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await login({ email, password });
+      if (response.requireOtp) {
+        toast.info(response.message);
+        navigate("/auth/verify-otp", { state: { email } });
+      } else {
+        navigate("/");
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+      if (error.response && error.response.status === 400) {
+        if (error.response.data.message.includes("Email not verified")) {
+          toast.error("Email not verified.", {
+            description: "Please check your email to verify your account.",
+          });
+        } else {
+          toast.error(error.response.data.message || "Invalid credentials");
+        }
+      } else {
+        toast.error("An error occurred. Please try again later.");
+      }
+    }
+  };
+
   return (
     <div>
+      <Toaster richColors />
       <div className="absolute inset-0">
         <img
           src="/assets/images/auth/bg-gradient.png"
@@ -35,60 +84,41 @@ const Login = () => {
                   Enter your email and password to login
                 </p>
               </div>
-              <form className="space-y-5 dark:text-white">
-                <div>
-                  <label htmlFor="Email" className="text-white-light">
-                    Email
-                  </label>
-                  <div className="relative text-white-dark">
-                    <input
-                      id="Email"
-                      type="email"
-                      placeholder="Enter Email"
-                      className="w-full rounded-md border border-slate-700 bg-slate-950 px-4 py-2 text-sm font-normal text-white !outline-none focus:border-primary focus:ring-transparent dark:border-[#17263c] dark:bg-[#121e32] dark:text-white-dark dark:focus:border-primary ps-10 placeholder:text-white-dark"
-                    />
-                    <span className="absolute start-4 top-1/2 -translate-y-1/2">
-                      <Mail size={16} />
-                    </span>
-                  </div>
-                </div>
-                <div>
-                  <label htmlFor="Password" className="text-white-light">
-                    Password
-                  </label>
-                  <div className="relative text-white-dark">
-                    <input
-                      id="Password"
-                      type={showPassword ? "text" : "password"}
-                      placeholder="Enter Password"
-                      className="w-full rounded-md border border-slate-700 bg-slate-950 px-4 py-2 text-sm font-normal text-white !outline-none focus:border-primary focus:ring-transparent dark:border-[#17263c] dark:bg-[#121e32] dark:text-white-dark dark:focus:border-primary ps-10 placeholder:text-white-dark"
-                    />
-                    <span className="absolute start-4 top-1/2 -translate-y-1/2">
-                      <Lock size={16} />
-                    </span>
-                    <button
-                      type="button"
-                      className="absolute end-4 top-1/2 -translate-y-1/2"
-                      onClick={togglePasswordVisibility}
-                    >
-                      {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
-                    </button>
-                  </div>
-                </div>
-                <div>
-                  <label className="flex cursor-pointer items-center">
-                    <input
-                      type="checkbox"
-                      className=" h-4 w-4 cursor-pointer rounded border-2 border-white-light bg-transparent text-primary accent-orange-500 !shadow-none !outline-none !ring-0 !ring-offset-0 checked:bg-[length:90%_90%] disabled:cursor-not-allowed disabled:bg-orange-500 ltr:mr-1.5 rtl:ml-1.5 dark:border-[#253b5c] dark:checked:border-transparent dark:disabled:bg-[#1b2e4b] bg-white dark:bg-black"
-                    />
-                    <span className="text-white-light pl-2">Remember me</span>
-                  </label>
+              <form
+                className="space-y-5 dark:text-white"
+                onSubmit={handleSubmit}
+              >
+                <InputField
+                  id="email"
+                  type="email"
+                  placeholder="Email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  icon={Mail}
+                />
+                <InputField
+                  id="password"
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  icon={Lock}
+                  togglePasswordVisibility={togglePasswordVisibility}
+                />
+                <div className="flex items-center justify-between">
+                  <Link
+                    to="/auth/forgot-password"
+                    className="text-sm text-primary hover:underline"
+                  >
+                    Forgot Password?
+                  </Link>
                 </div>
                 <button
                   type="submit"
                   className="relative flex items-center justify-center rounded-md px-5 py-2 text-sm font-semibold outline-none transition duration-300 hover:shadow-none text-white !mt-6 w-full border-0 uppercase shadow-[0_10px_20px_-10px_rgba(249,115,22,1)] gradient-button"
+                  disabled={loading}
                 >
-                  Sign in
+                  {loading ? "Loading..." : "Sign in"}
                 </button>
               </form>
               <div className="relative my-7 text-center md:mb-9">
@@ -150,7 +180,7 @@ const Login = () => {
                 </ul>
               </div>
               <div className="text-center text-white-light dark:text-white">
-                Don't have an account ?&nbsp;
+                Don't have an account?&nbsp;
                 <Link
                   to="/auth/register"
                   className="uppercase text-primary underline transition hover:text-orange-600 dark:hover:text-white"
@@ -165,4 +195,5 @@ const Login = () => {
     </div>
   );
 };
+
 export default Login;

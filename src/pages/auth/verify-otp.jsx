@@ -1,8 +1,14 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { Toaster, toast } from "sonner";
+import { useAuth } from "../../contexts/AuthContext";
+import AuthService from "../../services/authService";
 
 const VerifyOtp = () => {
+  const { verifyOtp, resendOtp } = useAuth();
   const [otp, setOtp] = useState(new Array(6).fill(""));
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleChange = (element, index) => {
     if (isNaN(element.value)) return;
@@ -17,21 +23,58 @@ const VerifyOtp = () => {
   const handleKeyDown = (event, index) => {
     if (event.key === "Backspace" && !otp[index] && index > 0) {
       const newOtp = [...otp];
-      newOtp[index - 1] = ""; 
+      newOtp[index - 1] = "";
       setOtp(newOtp);
       event.target.previousSibling.focus();
     }
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    const otpValue = otp.join("");
-    console.log("OTP submitted:", otpValue);
-    // Add logic to verify OTP here
+    const otpValue = otp.join(""); 
+    console.log("OTP submitted:", otpValue); 
+  
+    setLoading(true);
+  
+    try {
+      const response = await verifyOtp(otpValue);
+      console.log("OTP verification response:", response);
+  
+      if (response.accessToken) {
+        localStorage.setItem('accessToken', response.accessToken);
+        toast.success("Device verified successfully. You can now log in.");
+        navigate("/");
+      } else {
+        toast.error("OTP verification failed. Please try again.");
+      }
+    } catch (error) {
+      console.error("OTP verification error:", error);
+      toast.error(
+        error.response?.data?.message ||
+          "Failed to verify OTP. Please try again."
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleResendOtp = async () => {
+    try {
+      const accessToken = localStorage.getItem('accessToken');
+      if (!accessToken) {
+        throw new Error('No access token found');
+      }
+      await AuthService.resendOtp(accessToken);
+      toast.success('New OTP sent successfully');
+    } catch (error) {
+      console.error('Resend OTP error:', error);
+      toast.error('Failed to resend OTP. Please try again.');
+    }
   };
 
   return (
     <div>
+      <Toaster richColors />
       <div className="absolute inset-0">
         <img
           src="/assets/images/auth/bg-gradient.png"
@@ -52,7 +95,10 @@ const VerifyOtp = () => {
                   Enter the OTP sent to your email
                 </p>
               </div>
-              <form onSubmit={handleSubmit} className="space-y-5 dark:text-white">
+              <form
+                onSubmit={handleSubmit}
+                className="space-y-5 dark:text-white"
+              >
                 <div className="flex justify-center space-x-2">
                   {otp.map((data, index) => (
                     <input
@@ -71,18 +117,19 @@ const VerifyOtp = () => {
                 <button
                   type="submit"
                   className="relative flex items-center justify-center rounded-md px-5 py-2 text-sm font-semibold outline-none transition duration-300 hover:shadow-none text-white !mt-6 w-full border-0 uppercase shadow-[0_10px_20px_-10px_rgba(249,115,22,1)] gradient-button"
+                  disabled={loading}
                 >
-                  Verify
+                  {loading ? "Verifying..." : "Verify"}
                 </button>
               </form>
               <div className="text-center text-white-light dark:text-white mt-6">
                 Didn't receive the OTP?&nbsp;
-                <Link
-                  to="#"
+                <button
+                  onClick={handleResendOtp}
                   className="uppercase text-primary underline transition hover:text-orange-600 dark:hover:text-white"
                 >
                   Resend
-                </Link>
+                </button>
               </div>
             </div>
           </div>

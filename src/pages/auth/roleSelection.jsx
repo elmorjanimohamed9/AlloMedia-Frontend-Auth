@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom"; 
 import { User, Truck } from "lucide-react";
 
 const RoleSelection = () => {
   const [selectedRole, setSelectedRole] = useState("");
+  const navigate = useNavigate(); 
 
   const handleRoleChange = (event) => {
     setSelectedRole(event.target.value);
@@ -11,7 +13,10 @@ const RoleSelection = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log("Selected role:", selectedRole);
-    // Add logic to proceed with the selected role
+    // Store the selected role in local storage or state management
+    localStorage.setItem('selectedRole', selectedRole);
+    // Redirect to the registration page
+    navigate('/auth/register');
   };
 
   return (
