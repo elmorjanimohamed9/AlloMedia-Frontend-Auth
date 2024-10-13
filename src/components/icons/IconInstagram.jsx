@@ -1,3 +1,5 @@
+import React from "react";
+
 const IconInstagram = ({ className, fill = false, duotone = true }) => {
   return (
     <>

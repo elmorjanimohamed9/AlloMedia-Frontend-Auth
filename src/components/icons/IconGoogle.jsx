@@ -1,3 +1,5 @@
+import React from "react";
+
 const IconGoogle = ({ className, fill = false, duotone = true }) => {
   return (
     <svg

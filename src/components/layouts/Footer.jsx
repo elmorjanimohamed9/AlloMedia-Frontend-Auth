@@ -1,173 +1,89 @@
 import React from 'react';
-import payment from '../../assets/img/payment.png'
-import IconAppStore from '../icons/IconAppStore';
-import IconPlayStore from '../icons/IconPlayStore'
-import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Youtube } from 'lucide-react';
+import { FaFacebook, FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa';
+import paymentMethodsImage from '../../assets/img/payment.png';
 
 const Footer = () => {
-  const deliveryServices = {
-    restaurants: ['Fast Food', 'Traditional Restaurants', 'Pizza & Italian', 'Sushi & Asian', 'African Cuisine', 'Vegetarian & Vegan'],
-    groceries: ['Supermarkets', 'Grocery Stores', 'Bakeries', 'Butcher Shops', 'Fruits & Vegetables', 'Organic & Local'],
-    expressServices: ['Express Parcels', 'Documents', 'Pharmacy', 'Flowers', 'Dry Cleaning'],
-    beverages: ['Water & Soft Drinks', 'Fresh Juices', 'Coffee & Tea', 'Energy Drinks']
-  };
-
   return (
-    <footer className="bg-cover bg-center bg-no-repeat border-t border-neutral-700pt-8 lg:pt-8" >
-      <div className="border-b border-gray-700 pb-8 mb-8 px-10">
-        <div className="container mx-auto">
-          <h2 className="text-white text-2xl font-bold mb-6 p-8 text-center">Our Delivery Services</h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div>
-              <h3 className="text-white text-base font-semibold mb-3">Restaurants:</h3>
-              <div className="flex flex-wrap gap-2">
-                {deliveryServices.restaurants.map((item, index) => (
-                  <a key={index} href="#" className="text-gray-400 hover:text-orange-500 transition-colors text-sm">
-                    {item}
-                  </a>
-                ))}
-              </div>
-            </div>
-
-            <div>
-              <h3 className="text-white text-base font-semibold mb-3">Groceries:</h3>
-              <div className="flex flex-wrap gap-2">
-                {deliveryServices.groceries.map((item, index) => (
-                  <a key={index} href="#" className="text-gray-400 hover:text-orange-500 transition-colors text-sm">
-                    {item}
-                  </a>
-                ))}
-              </div>
-            </div>
-
-            <div>
-              <h3 className="text-white text-base font-semibold mb-3">Express Services:</h3>
-              <div className="flex flex-wrap gap-2">
-                {deliveryServices.expressServices.map((item, index) => (
-                  <a key={index} href="#" className="text-gray-400 hover:text-orange-500 transition-colors text-sm">
-                    {item}
-                  </a>
-                ))}
-              </div>
-            </div>
-
-            <div>
-              <h3 className="text-white text-base font-semibold mb-3">Beverages:</h3>
-              <div className="flex flex-wrap gap-2">
-                {deliveryServices.beverages.map((item, index) => (
-                  <a key={index} href="#" className="text-gray-400 hover:text-orange-500 transition-colors text-sm">
-                    {item}
-                  </a>
-                ))}
-              </div>
-            </div>
+    <footer className="bg-slate-50 text-gray-600 py-12 border-t border-t-2 border-slate-200">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center mb-8">
+          <div className="flex items-center">
+            <span className="text-orange-500 text-2xl font-bold mr-2">P</span>
+            <span className="text-slate-900 text-xl font-semibold">Pagedone</span>
+          </div>
+          <div className="flex space-x-4">
+            <a href="#" className="bg-slate-200 text-slate-950 hover:bg-orange-500 hover:text-white p-2 rounded-full"><FaFacebook /></a>
+            <a href="#" className="bg-slate-200 text-slate-950 hover:bg-orange-500 hover:text-white p-2 rounded-full"><FaInstagram /></a>
+            <a href="#" className="bg-slate-200 text-slate-950 hover:bg-orange-500 hover:text-white p-2 rounded-full"><FaTwitter /></a>
+            <a href="#" className="bg-slate-200 text-slate-950 hover:bg-orange-500 hover:text-white p-2 rounded-full"><FaYoutube /></a>
           </div>
         </div>
-      </div>
 
-      <div className="border-b border-gray-700 pb-8 mb-8 p-10">
-        <div className="container mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
-            {/* For Customers */}
-            <div>
-              <h2 className="text-white text-sm uppercase mb-4 pb-2 relative underline underline-offset-8 decoration-2 decoration-orange-500 after:content-[''] after:absolute after:bottom-0 after:left-0 after:bg-orange-500 after:w-15 after:h-px">
-                For Customers
-              </h2>
-              <ul className="space-y-2">
-                {['Sign Up', 'Order Tracking', 'Loyalty Program', 'Special Offers', 'User Guide'].map((item, index) => (
-                  <li key={index}>
-                    <a href="#" className="text-gray-400 hover:text-orange-500 transition-colors text-sm">{item}</a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* For Partners */}
-            <div>
-              <h2 className="text-white text-sm uppercase mb-4 pb-2 relative underline underline-offset-8 decoration-2 decoration-orange-500 after:content-[''] after:absolute after:bottom-0 after:left-0 after:bg-orange-500 after:w-15 after:h-px">
-                For Partners
-              </h2>
-              <ul className="space-y-2">
-                {['Become a Restaurant Partner', 'Become a Driver', 'Partner Help Center', 'Pricing'].map((item, index) => (
-                  <li key={index}>
-                    <a href="#" className="text-gray-400 hover:text-orange-500 transition-colors text-sm">{item}</a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* About */}
-            <div>
-              <h2 className="text-white text-sm uppercase mb-4 pb-2 relative underline underline-offset-8 decoration-2 decoration-orange-500 after:content-[''] after:absolute after:bottom-0 after:left-0 after:bg-orange-500 after:w-15 after:h-px">
-                About
-              </h2>
-              <ul className="space-y-2">
-                {['About Us', 'Legal Notice', 'Terms & Conditions', 'Blog', 'Careers'].map((item, index) => (
-                  <li key={index}>
-                    <a href="#" className="text-gray-400 hover:text-orange-500 transition-colors text-sm">{item}</a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Contact */}
-            <div>
-              <h2 className="text-white text-sm uppercase mb-4 pb-2 relative underline underline-offset-8 decoration-2 decoration-orange-500 after:content-[''] after:absolute after:bottom-0 after:left-0 after:bg-orange-500 after:w-15 after:h-px">
-                Contact
-              </h2>
-              <ul className="space-y-2">
-                <li className="flex gap-3">
-                  <MapPin className="text-gray-400" size={28} />
-                  <address className="text-gray-400 text-sm  hover:text-orange-500 not-italic">
-                    123 Republic Avenue, New York, NY 10001, USA
-                  </address>
-                </li>
-                <li className="flex gap-3">
-                  <Phone className="text-gray-400" size={20} />
-                  <a href="tel:+12125550123" className="text-gray-400 hover:text-orange-500 transition-colors text-sm">
-                    (212) 555-0123
-                  </a>
-                </li>
-                <li className="flex gap-3">
-                  <Mail className="text-gray-400" size={20} />
-                  <a href="mailto:contact@allomedia.com" className="text-gray-400 hover:text-orange-500 transition-colors text-sm">
-                    contact@allomedia.com
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            {/* Social Media */}
-            <div>
-              <h2 className="text-white text-sm uppercase mb-4 pb-2 relative underline underline-offset-8 decoration-2 decoration-orange-500 after:content-[''] after:absolute after:bottom-0 after:left-0 after:bg-orange-500 after:w-15 after:h-px">
-                Follow Us
-              </h2>
-              <div >
-                <ul className="flex gap-3">
-                    <li><a href="" className='text-gray-400 hover:text-orange-500'><Facebook strokeWidth={2} size={24}/></a></li>
-                    <li><a href="" className='text-gray-400 hover:text-orange-500'><Instagram /></a></li>
-                    <li><a href="" className='text-gray-400 hover:text-orange-500'><Youtube /></a></li>
-                    <li><a href="" className='text-gray-400 hover:text-orange-500'><Twitter /></a></li>
-                </ul>
+        <div className="grid grid-cols-1 py-10 border-t border-slate-200 md:grid-cols-4 gap-8">
+          <div>
+            <h3 className="text-slate-900 text-lg font-semibold mb-4">Pagedone</h3>
+            <ul className="space-y-2">
+              <li><a href="#" className="hover:text-orange-500">Home</a></li>
+              <li><a href="#" className="hover:text-orange-500">About</a></li>
+              <li><a href="#" className="hover:text-orange-500">Pricing</a></li>
+              <li><a href="#" className="hover:text-orange-500">Pro Version</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3 className="text-slate-900 text-lg font-semibold mb-4">Products</h3>
+            <ul className="space-y-2">
+              <li><a href="#" className="hover:text-orange-500">Figma UI System</a></li>
+              <li><a href="#" className="hover:text-orange-500">Icons Assets</a></li>
+              <li><a href="#" className="hover:text-orange-500">Responsive Blocks</a></li>
+              <li><a href="#" className="hover:text-orange-500">Components Library</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3 className="text-slate-900 text-lg font-semibold mb-4">Resources</h3>
+            <ul className="space-y-2">
+              <li><a href="#" className="hover:text-orange-500">FAQs</a></li>
+              <li><a href="#" className="hover:text-orange-500">Quick Start</a></li>
+              <li><a href="#" className="hover:text-orange-500">Documentation</a></li>
+              <li><a href="#" className="hover:text-orange-500">User Guide</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3 className="text-slate-900 text-lg font-semibold mb-4">Newsletter</h3>
+            <form className="space-y-4">
+              <div className="relative">
+                <input 
+                  type="email" 
+                  placeholder="mail@allomedia.com" 
+                  className="w-full bg-white border text-sm border-slate-300 rounded-md px-4 py-2 pr-24 focus:outline-none focus:ring-1 focus:ring-orange-500"
+                />
+                <button 
+                  type="submit" 
+                  className="absolute rounded-e-md bottom-0 top-0 right-0 bg-orange-500 text-white px-4 py-1 hover:bg-orange-600 transition duration-300"
+                >
+                  Send
+                </button>
               </div>
-            </div>
+              <div className="flex items-start justify-start space-x-2">
+                <input type="checkbox" id="terms" className="rounded accent-orange-500 focus:ring-orange-500" />
+                <label htmlFor="terms" className="text-sm align-top">
+                  I agree with <a href="#" className="text-orange-500">Privacy Policy</a> and <a href="#" className="text-orange-500">Terms of Condition</a>
+                </label>
+              </div>
+            </form>
           </div>
         </div>
-      </div>
 
-      <div className="mb-12">
-        <div className="container mx-auto text-center">
-          <div className="flex flex-wrap justify-center gap-4 mb-6">
-            <img src={payment} alt="Payment Methode" />
-          </div>
-          <div className="flex justify-center gap-4 mb-6">
-            <IconAppStore />
-            <IconPlayStore />
-          </div>
-          <p className="text-gray-400 text-xs font-medium tracking-wider">
-            Copyright © 2024 <a href="#" className="inline text-inherit">AlloMedia</a> - All rights reserved
+        <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-slate-200">
+          <p className="text-center text-sm text-gray-500">
+            Copyright © {new Date().getFullYear()} <a href="#" className="font-medium text-slate-700 hover:text-orange-500 transition-colors duration-300">AlloMedia</a> - All rights reserved
           </p>
+          <div className="flex items-center space-x-4">
+            <img 
+              src={paymentMethodsImage} 
+              alt="Payment methods" 
+              className="h-8 object-contain"
+            />
+          </div>
         </div>
       </div>
     </footer>

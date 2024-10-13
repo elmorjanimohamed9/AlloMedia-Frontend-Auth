@@ -8,6 +8,7 @@ const RoleSelection = lazy(() => import('../pages/auth/roleSelection'));
 const NotFound = lazy(() => import('../pages/404'));
 const VerifyEmail = lazy(() => import('../pages/auth/VerifyEmail'));
 const ForgotPassword = lazy(() => import('../pages/auth/ForgotPassword'));
+const Home = lazy(() => import('../pages/Home'));
 const routes = [
     
     {
@@ -41,6 +42,10 @@ const routes = [
     {
         path: '/auth/reset-password/:token',
         element: <ResetPassword />
+    },
+    {
+        path: '/',
+        element: <Home />
     },
     {
         path: '*',

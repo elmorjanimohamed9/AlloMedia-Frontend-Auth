@@ -1,7 +1,7 @@
+import React from "react";
 import { createContext, useState, useEffect, useContext } from "react";
 import AuthService from "../services/authService";
 import { useNavigate } from "react-router-dom";
-import * as jwtDecode from "jwt-decode";
 
 const AuthContext = createContext();
 
@@ -23,25 +23,6 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  useEffect(() => {
-    const initAuth = async () => {
-      const token = localStorage.getItem("accessToken");
-      if (token) {
-        try {
-          const response = await api.get("/auth/me");
-          setUser(response.data);
-        } catch (error) {
-          console.error("Failed to fetch user data:", error);
-          localStorage.removeItem("accessToken");
-          localStorage.removeItem("user");
-          localStorage.removeItem("email");
-        }
-      }
-      setLoading(false);
-    };
-
-    initAuth();
-  }, []);
 
   const login = async (credentials) => {
     try {

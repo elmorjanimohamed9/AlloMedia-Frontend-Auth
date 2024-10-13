@@ -50,22 +50,26 @@ const AuthService = {
     },
 
     refreshToken: async () => {
-        const response = await api.post('/auth/refresh-token');
-        if (response.data.accessToken) {
-            localStorage.setItem('accessToken', response.data.accessToken);
+        try {
+            const response = await axios.post(`${API_BASE_URL}/auth/refresh-token`, {}, {
+                withCredentials: true, 
+            });
+            return response.data; 
+        } catch (error) {
+            throw new Error('Failed to refresh token');
         }
-        return response.data;
     },
 
     logout: async () => {
         try {
-            await api.post('/auth/logout');
+            await api.post('/auth/logout'); 
         } catch (error) {
             console.error("Logout error:", error);
         } finally {
             localStorage.removeItem('user');
             localStorage.removeItem('accessToken');
-            localStorage.removeItem('email');
+            localStorage.removeItem('userId');
+            window.dispatchEvent(new CustomEvent('logout')); 
         }
     },
 };
