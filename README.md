@@ -34,15 +34,42 @@ Here are some screenshots of the application to give you an overview of the user
 ### Password Reset Page
 ![Password Reset Page](path/to/reset-password-screenshot.png)
 
+### Home Page
+![Home Page](path/to/home-screenshot.png)
+
+### Role Selection Page
+![Role Selection Page](path/to/role-selection-screenshot.png)
+
+### Email Verification Page
+![Email Verification Page](path/to/email-verification-screenshot.png)
+
+### Forgot Password Page
+![Forgot Password Page](path/to/forgot-password-screenshot.png)
+
+### OTP Verification Page
+![OTP Verification Page](path/to/otp-verification-screenshot.png)
+
+### Delivery Tracking Page
+![Delivery Tracking Page](path/to/delivery-tracking-screenshot.png)
+
+### Services Page
+![Services Page](path/to/services-screenshot.png)
+
+### Footer
+![Footer](path/to/footer-screenshot.png)
+
+### 404 Not Found Page
+![404 Not Found Page](path/to/404-screenshot.png)
+
 ## Prerequisites
-- Node.js (version 14 or higher)
+- Node.js (version 20 or higher)
 - Docker and Docker Compose
 
 ## Installation
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/your-username/your-project.git
+   git clone https://github.com/elmorjanimohamed9/AlloMedia-Frontend-Auth
    cd your-project
    ```
 
@@ -62,7 +89,7 @@ Here are some screenshots of the application to give you an overview of the user
    ```
 
 2. **Access the application:**
-   Open your browser and go to `http://localhost:3000`.
+   Open your browser and go to `http://localhost:5173`.
 
 ## Dockerization
 
@@ -77,57 +104,7 @@ Here are some screenshots of the application to give you an overview of the user
    ```
 
 3. **Access the application:**
-   Open your browser and go to `http://localhost:3000`.
-
-## Application Pages
-
-### 1. Home
-- **Description**: The application's homepage showcasing the main services and features.
-- **Code**: `src/pages/Home.jsx`
-
-### 2. Registration
-- **Description**: Allows users to create an account by providing personal information.
-- **Code**: `src/pages/auth/Register.jsx`
-
-### 3. Login
-- **Description**: Page for users to log into their account.
-- **Code**: `src/pages/auth/Login.jsx`
-
-### 4. Role Selection
-- **Description**: Allows users to select their role before registration.
-- **Code**: `src/pages/auth/roleSelection.jsx`
-
-### 5. Password Reset
-- **Description**: Page to reset the password in case of forgetting.
-- **Code**: `src/pages/auth/resetPassword.jsx`
-
-### 6. Email Verification
-- **Description**: Page to verify the email address after registration.
-- **Code**: `src/pages/auth/VerifyEmail.jsx`
-
-### 7. Forgot Password
-- **Description**: Allows users to request a password reset link.
-- **Code**: `src/pages/auth/ForgotPassword.jsx`
-
-### 8. OTP Verification
-- **Description**: Page to enter the OTP sent by email for verification.
-- **Code**: `src/pages/auth/verify-otp.jsx`
-
-### 9. Delivery Tracking
-- **Description**: Allows users to track their order in real-time.
-- **Code**: `src/components/DeliveryTracking.jsx`
-
-### 10. Services
-- **Description**: Presents the various services offered by the application.
-- **Code**: `src/components/ServiceCards.jsx`
-
-### 11. Footer
-- **Description**: Footer component displaying copyright information and social media icons.
-- **Code**: `src/components/layouts/Footer.jsx`
-
-### 12. 404 Not Found
-- **Description**: Page displayed when the user navigates to a non-existent route.
-- **Code**: `src/pages/404.jsx`
+   Open your browser and go to `http://localhost:5173`.
 
 ## Libraries and Frameworks
 
@@ -138,7 +115,7 @@ Here are some screenshots of the application to give you an overview of the user
 - **Context API/Redux**: For global state management.
 
 ## Icons and Images
-- **Icons**: Using `react-icons` for interface icons.
+- **Icons**: Using `react-icons` for interface icons. This library provides a wide range of icons that can be easily integrated into your React components.
 - **Images**: Logos are stored in `src/assets/img`.
 
 ## Project Management
@@ -149,3 +126,11 @@ Contributions are welcome. Please submit a pull request for any improvements or 
 
 ## Authors
 - **Elmorjani Mohamed** - [My GitHub Profile](https://github.com/elmorjanimohamed9)
+
+---
+
+For more details, check our [complete documentation](https://elmorjanimohamed.atlassian.net/jira/software/projects/AFA/boards/4).
+
+---
+
+[![Jira Logo](https://upload.wikimedia.org/wikipedia/commons/8/82/Jira_%28Software%29_logo.svg)](https://elmorjanimohamed.atlassian.net/jira/software/projects/AFA/boards/4)
