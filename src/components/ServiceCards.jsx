@@ -4,10 +4,10 @@ import ProductIcon from '../assets/img/services2-ilustration.svg';
 import ReceivedIcon from '../assets/img/services3-ilustration.svg';
 
 const ServiceCard = ({ title, description, icon, altText }) => (
-  <div className="bg-slate-50 w-[22rem] max-w-sm rounded-2xl shadow-md shadow-slate-500/10 p-6 flex flex-col items-center text-center">
-    <h3 className="text-xl w-full max-w-md font-semibold mb-4">{title}</h3>
+  <div className="bg-slate-50 dark:bg-slate-800 w-full max-w-xs border border-slate-200 dark:border-slate-700 rounded-2xl shadow-md shadow-slate-500/10 p-6 flex flex-col items-center text-center">
+    <h3 className="text-xl w-full dark:text-slate-50 font-semibold mb-4">{title}</h3>
     <img src={icon} alt={altText} className="w-full h-32 mb-4" />
-    <p className="text-gray-600 mb-4">{description}</p>
+    <p className="text-gray-600 dark:text-slate-400 mb-4">{description}</p>
     <a href="#" className="text-orange-500 hover:text-orange-600 font-medium">Learn more</a>
   </div>
 );
@@ -36,9 +36,9 @@ const ServiceCards = () => {
 
   return (
     <section className="py-16">
-      <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8">
-        <h2 className="text-3xl font-bold text-center mb-12">Some Services We Offer</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-1">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 className="text-3xl text-slate-900 dark:text-slate-50 font-bold text-center mb-12">Some Services We Offer</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {services.map((service, index) => (
             <ServiceCard key={index} {...service} />
           ))}

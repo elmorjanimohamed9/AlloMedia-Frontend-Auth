@@ -2,6 +2,7 @@ import React, { Suspense, useEffect, useState } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import 'animate.css';
 import "./App.css";
+import { ThemeProvider } from './contexts/ThemeContext';
 import Navbar from "./components/layouts/Navbar";
 import Footer from "./components/layouts/Footer";
 import { routes } from './router/routes';
@@ -23,6 +24,7 @@ const App = () => {
   }, []);
 
   return (
+    <ThemeProvider>
     <>
       {showLoader && <Loader />} 
 
@@ -37,6 +39,7 @@ const App = () => {
       </Suspense>
       {!isAuthPage && <Footer />}
     </>
+    </ThemeProvider>
   );
 }
 

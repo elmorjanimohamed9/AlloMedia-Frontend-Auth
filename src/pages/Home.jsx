@@ -49,7 +49,7 @@ const Home = ({
       </section>
 
       {/* About Section */}
-      <section className="bg-gray-50 dark:bg-gray-800 py-16 md:py-20 lg:pt-16 lg:pb-24">
+      <section className="py-16 md:py-20 lg:pt-16 lg:pb-24">
         <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 gap-3 items-center lg:gap-24">
             <div className="space-y-32">
