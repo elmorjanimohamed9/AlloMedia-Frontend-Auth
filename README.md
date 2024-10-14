@@ -70,7 +70,7 @@ Here are images showing the application in both light and dark modes on web and 
 
    ```bash
    git clone https://github.com/elmorjanimohamed9/AlloMedia-Frontend-Auth
-   cd your-project
+   cd AlloMedia-Frontend-Auth
    ```
 
 2. **Install dependencies:**
