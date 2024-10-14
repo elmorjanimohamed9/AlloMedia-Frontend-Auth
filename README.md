@@ -44,14 +44,16 @@ Here are images showing the application in both light and dark modes on web and 
 
 ### Mobile
 
-- **Light Mode:**
-
-  ![Mobile Light Mode](document/img/mobile-light.png)
-
-- **Dark Mode:**
-
-  ![Mobile Dark Mode](document/img/mobile-dark.png)
-
+<div style="display: flex; justify-content: space-around;">
+  <div>
+    <h4>Light Mode</h4>
+    <img src="document/img/mobile-light.png" alt="Mobile Light Mode" width="200">
+  </div>
+  <div>
+    <h4>Dark Mode</h4>
+    <img src="document/img/mobile-dark.png" alt="Mobile Dark Mode" width="200">
+  </div>
+</div>
 ## Prerequisites
 
 - Node.js (version 20 or higher)
