@@ -16,7 +16,7 @@ const Home = ({
   return (
     <div className="bg-slate-50 dark:bg-slate-900">
       {/* Hero Section */}
-      <section className="py-16 md:py-20 lg:py-28" id="home">
+      <section className="py-10 md:py-20 lg:py-28" id="home">
         <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8">
           <div className="lg:flex lg:items-center lg:justify-between">
             <div className="max-w-xl space-y-8">
@@ -37,11 +37,11 @@ const Home = ({
                 </div>
               </div>
             </div>
-            <div className="mt-12 relative sm:max-w-lg sm:mx-auto lg:mt-0 lg:max-w-none lg:mx-0 lg:col-span-6 lg:flex lg:items-center">
+            <div className="mt-12 relative sm:mx-auto lg:mt-0 lg:max-w-none lg:mx-0 lg:col-span-6 lg:flex lg:items-center">
               <img
                 src={HomeIllustration}
                 alt="home illustration"
-                className="w-full h-[28rem] max-w-xl mx-auto"
+                className="w-full h-[13rem] lg:h-[28rem] lg:max-w-xl mx-auto"
               />
             </div>
           </div>
@@ -49,11 +49,11 @@ const Home = ({
       </section>
 
       {/* About Section */}
-      <section className="py-16 md:py-20 lg:pt-16 lg:pb-24">
+      <section className="py-10 md:py-20 lg:pt-16 lg:pb-24">
         <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 gap-3 items-center lg:gap-24">
             <div className="space-y-32">
-              <div className="flex flex-col lg:flex-row items-center justify-between gap-14">
+              <div className="flex flex-col-reverse  lg:flex-row items-center justify-between gap-14">
                 <img
                   src={AboutIllustration}
                   alt="about illustration"
@@ -68,7 +68,7 @@ const Home = ({
                   </p>
                 </div>
               </div>
-              <div className="flex flex-col-reverse lg:flex-row items-center justify-between gap-14">
+              <div className="flex flex-col lg:flex-row items-center justify-between gap-14">
                 <div className="text-center lg:text-left">
                   <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
                       Your Safety Is Important
