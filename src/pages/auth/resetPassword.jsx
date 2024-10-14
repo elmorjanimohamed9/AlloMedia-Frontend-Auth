@@ -136,8 +136,8 @@ const ResetPassword = () => {
                 <button
                   type="submit"
                   className="relative flex items-center bg-orange-500 hover:bg-gradient-to-r hover:from-orange-500 hover:to-orange-600 justify-center rounded-md px-5 py-2 font-semibold outline-none transition duration-300 hover:shadow-none text-white !mt-6 w-full border-0 shadow-[0_10px_20px_-10px_rgba(249,115,22,1)]"
-                  disabled={isLoading}
-                >
+                  disabled={isLoading} >
+
                   {isLoading ? (
                     <>
                     <SpinnerIcon className="w-4 h-4 me-3 text-white" />
@@ -146,6 +146,7 @@ const ResetPassword = () => {
                   ) : (
                     "Reset Password"
                   )}
+                  
                 </button>
               </form>
             </div>
