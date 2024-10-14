@@ -24,6 +24,8 @@ This project is a delivery application developed with React, focused on user aut
 
 ## User Interface Overview
 Here are some screenshots of the application to give you an overview of the user interface:
+### Home Page
+![Home Page](path/to/home-screenshot.png)
 
 ### Registration Page
 ![Registration Page](path/to/registration-screenshot.png)
@@ -33,9 +35,6 @@ Here are some screenshots of the application to give you an overview of the user
 
 ### Password Reset Page
 ![Password Reset Page](path/to/reset-password-screenshot.png)
-
-### Home Page
-![Home Page](path/to/home-screenshot.png)
 
 ### Role Selection Page
 ![Role Selection Page](path/to/role-selection-screenshot.png)
@@ -48,15 +47,6 @@ Here are some screenshots of the application to give you an overview of the user
 
 ### OTP Verification Page
 ![OTP Verification Page](path/to/otp-verification-screenshot.png)
-
-### Delivery Tracking Page
-![Delivery Tracking Page](path/to/delivery-tracking-screenshot.png)
-
-### Services Page
-![Services Page](path/to/services-screenshot.png)
-
-### Footer
-![Footer](path/to/footer-screenshot.png)
 
 ### 404 Not Found Page
 ![404 Not Found Page](path/to/404-screenshot.png)
