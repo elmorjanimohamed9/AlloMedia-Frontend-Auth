@@ -10,7 +10,7 @@ import Loader from './components/Loader';
 import NotFound from './pages/404';
 const App = () => {
   const location = useLocation();
-  const isAuthPage = ['/auth/login', '/auth/register', '/auth/verify-otp', '/auth/reset-password', '/auth/role-selection', '/auth/verify-email', '/auth/forgot-password'].includes(location.pathname);
+  const isAuthPage = ['/auth/login', '/auth/register', '/auth/verify-otp', '/auth/reset-password', '/auth/role-selection', '/auth/verify-email', '/auth/forgot-password', '*'].includes(location.pathname);
   const [showLoader, setShowLoader] = useState(true);
 
   useEffect(() => {
