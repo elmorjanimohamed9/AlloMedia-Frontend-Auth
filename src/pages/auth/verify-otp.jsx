@@ -3,11 +3,14 @@ import { useNavigate } from "react-router-dom";
 import { Toaster, toast } from "sonner";
 import { useAuth } from "../../contexts/AuthContext";
 import AuthService from "../../services/authService";
+import SpinnerIcon from "../../components/SpinnerIcon";
+import Loader from "../../components/Loader"; // Import Loader
 
 const VerifyOtp = () => {
   const { verifyOtp, resendOtp } = useAuth();
   const [otp, setOtp] = useState(new Array(6).fill(""));
   const [loading, setLoading] = useState(false);
+  const [showLoader, setShowLoader] = useState(false); // State to control Loader visibility
   const navigate = useNavigate();
 
   const handleChange = (element, index) => {
@@ -31,19 +34,25 @@ const VerifyOtp = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const otpValue = otp.join(""); 
-    console.log("OTP submitted:", otpValue); 
-  
+    const otpValue = otp.join("");
+    console.log("OTP submitted:", otpValue);
+
     setLoading(true);
-  
+
     try {
       const response = await verifyOtp(otpValue);
       console.log("OTP verification response:", response);
-  
+
       if (response.accessToken) {
         localStorage.setItem('accessToken', response.accessToken);
         toast.success("Device verified successfully. You can now log in.");
-        navigate("/");
+
+        // Show loader before navigating
+        setShowLoader(true);
+        setTimeout(() => {
+          setShowLoader(false);
+          navigate("/auth/login");
+        }, 2000); // Adjust the delay as needed
       } else {
         toast.error("OTP verification failed. Please try again.");
       }
@@ -57,7 +66,6 @@ const VerifyOtp = () => {
       setLoading(false);
     }
   };
-
 
   const handleResendOtp = async () => {
     try {
@@ -76,6 +84,7 @@ const VerifyOtp = () => {
   return (
     <div>
       <Toaster richColors />
+      {showLoader && <Loader />} 
       <div className="absolute inset-0">
         <img
           src="/assets/images/auth/bg-gradient.png"
@@ -121,7 +130,14 @@ const VerifyOtp = () => {
                   className="relative flex items-center bg-orange-500 hover:bg-gradient-to-r hover:from-orange-500 hover:to-orange-600 justify-center rounded-md px-5 py-2 font-semibold outline-none transition duration-300 hover:shadow-none text-white !mt-6 w-full border-0 shadow-[0_10px_20px_-10px_rgba(249,115,22,1)]"
                   disabled={loading}
                 >
-                  {loading ? "Verifying..." : "Verify"}
+                  {loading ? (
+                    <>
+                      <SpinnerIcon className="w-4 h-4 me-3 text-white" />
+                      Verifying...
+                    </>
+                  ) : (
+                    "Verify"
+                  )}
                 </button>
 
               </form>

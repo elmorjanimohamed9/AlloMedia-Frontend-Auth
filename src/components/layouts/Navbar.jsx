@@ -5,10 +5,12 @@ import logoDark from "../../assets/img/logo-dark.svg";
 import { IoMoon } from "react-icons/io5";
 import { IoSunny } from "react-icons/io5";
 import { ThemeContext } from "../../contexts/ThemeContext";
+import { AuthContext } from "../../contexts/AuthContext"; 
 
 const Navbar = () => {
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
   const { isDarkMode, setIsDarkMode } = useContext(ThemeContext);
+  const { user, logout } = useContext(AuthContext); 
   const [isScrolled, setIsScrolled] = useState(false);
 
   const toggleDarkMode = () => {
@@ -99,18 +101,29 @@ const Navbar = () => {
                 <IoSunny color="#94a3b8" size="20" />
               )}
             </button>
-            <a
-              href="/auth/login"
-              className="text-slate-900 hover:text-slate-50 dark:text-slate-50 font-medium py-2 px-3 border rounded-md border-slate-400 dark:border-slate-700 hover:bg-gradient-to-r hover:from-orange-500 hover:to-orange-600 transition-colors duration-300"
-            >
-              Sign In
-            </a>
-            <a
-              href="/auth/role-selection"
-              className="text-white font-medium bg-orange-500 hover:bg-gradient-to-r hover:from-orange-500 hover:to-orange-600 transition-colors duration-300 py-2 px-3 rounded-md dark:border-slate-700"
-            >
-              Create an account
-            </a>
+            {user ? (
+              <button
+                onClick={logout}
+                className="text-slate-900 hover:text-slate-50 dark:text-slate-50 font-medium py-2 px-3 border rounded-md border-slate-400 dark:border-slate-700 hover:bg-gradient-to-r hover:from-orange-500 hover:to-orange-600 transition-colors duration-300"
+              >
+                Logout
+              </button>
+            ) : (
+              <>
+                <a
+                  href="/auth/login"
+                  className="text-slate-900 hover:text-slate-50 dark:text-slate-50 font-medium py-2 px-3 border rounded-md border-slate-400 dark:border-slate-700 hover:bg-gradient-to-r hover:from-orange-500 hover:to-orange-600 transition-colors duration-300"
+                >
+                  Sign In
+                </a>
+                <a
+                  href="/auth/role-selection"
+                  className="text-white font-medium bg-orange-500 hover:bg-gradient-to-r hover:from-orange-500 hover:to-orange-600 transition-colors duration-300 py-2 px-3 rounded-md dark:border-slate-700"
+                >
+                  Create an account
+                </a>
+              </>
+            )}
           </div>
           <div className="lg:hidden flex items-center">
             <button
@@ -183,18 +196,29 @@ const Navbar = () => {
               </li>
             </ul>
             <div className="flex space-x-6 mt-8">
-              <a
-                href="/auth/login"
-                className="py-1 px-2 border rounded-md text-slate-900 dark:text-slate-50 hover:text-slate-50 hover:bg-gradient-to-r hover:from-orange-500 hover:to-orange-600 transition-colors duration-300"
-              >
-                Sign In
-              </a>
-              <a
-                href="/auth/role-selection"
-                className="py-1 px-2 text-white rounded-md bg-orange-500 hover:bg-gradient-to-r hover:from-orange-500 hover:to-orange-600 transition-colors duration-300"
-              >
-                Create an account
-              </a>
+              {user ? (
+                <button
+                  onClick={logout}
+                  className="py-1 px-2 border rounded-md text-slate-900 dark:text-slate-50 hover:text-slate-50 hover:bg-gradient-to-r hover:from-orange-500 hover:to-orange-600 transition-colors duration-300"
+                >
+                  Logout
+                </button>
+              ) : (
+                <>
+                  <a
+                    href="/auth/login"
+                    className="py-1 px-2 border rounded-md text-slate-900 dark:text-slate-50 hover:text-slate-50 hover:bg-gradient-to-r hover:from-orange-500 hover:to-orange-600 transition-colors duration-300"
+                  >
+                    Sign In
+                  </a>
+                  <a
+                    href="/auth/role-selection"
+                    className="py-1 px-2 text-white rounded-md bg-orange-500 hover:bg-gradient-to-r hover:from-orange-500 hover:to-orange-600 transition-colors duration-300"
+                  >
+                    Create an account
+                  </a>
+                </>
+              )}
             </div>
           </div>
         )}

@@ -5,10 +5,7 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
     
   ],
-  darkMode: ['variant', [
-    '@media (prefers-color-scheme: dark) { &:not(.light *) }',
-    '&:is(.dark *)',
-  ]],
+  darkMode: 'class',
   theme: {
     container: {
         center: true,

@@ -7,8 +7,9 @@ import SpinnerIcon from "../../components/SpinnerIcon";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
+  const [isLoading, setIsLoading] = useState(false); 
   const navigate = useNavigate();
-  const { forgotPassword, loading } = useAuth();
+  const { forgotPassword } = useAuth();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -17,6 +18,8 @@ const ForgotPassword = () => {
       toast.error("Please enter a valid email address.");
       return;
     }
+
+    setIsLoading(true); 
 
     try {
       await forgotPassword(email);
@@ -29,6 +32,8 @@ const ForgotPassword = () => {
       toast.error(
         error.message || "Failed to send reset email. Please try again."
       );
+    } finally {
+      setIsLoading(false); 
     }
   };
 
@@ -60,35 +65,38 @@ const ForgotPassword = () => {
                 className="space-y-5 dark:text-white"
               >
                 <div>
-                <label htmlFor="Email" className="text-slate-700 dark:text-slate-100 block mb-1">
+                  <label
+                    htmlFor="Email"
+                    className="text-slate-700 dark:text-slate-100 block mb-1"
+                  >
                     Email
                   </label>
-                <div className="relative text-white-dark">
-                  <input
-                    type="email"
-                    placeholder="Enter your email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="w-full rounded-md border border-slate-400 bg-white px-4 py-2 text-sm font-normal text-slate-700 !outline-none focus:border-primary focus:ring-transparent dark:border-[#17263c] dark:bg-slate-800 dark:text-slate-50 dark:focus:border-primary ps-10 placeholder:text-slate-700 dark:placeholder:text-slate-400"
-                  />
-                  <span className="absolute start-4 top-1/2 -translate-y-1/2">
-                    <Mail size={16} />
-                  </span>
-                </div>
-                <button
-                  type="submit"
-                  className="relative flex items-center bg-orange-500 hover:bg-gradient-to-r hover:from-orange-500 hover:to-orange-600 justify-center rounded-md px-5 py-2 font-semibold outline-none transition duration-300 hover:shadow-none text-white !mt-6 w-full border-0 shadow-[0_10px_20px_-10px_rgba(249,115,22,1)]"
-                  disabled={loading}
-                >
-                  {loading ? (
-                    <>
-                      <SpinnerIcon className="w-4 h-4 me-3 text-white" />
-                      Sending...
-                    </>
-                  ) : (
-                    "Send"
-                  )}
-                </button>
+                  <div className="relative text-white-dark">
+                    <input
+                      type="email"
+                      placeholder="Enter your email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className="w-full rounded-md border border-slate-400 bg-white px-4 py-2 text-sm font-normal text-slate-700 !outline-none focus:border-primary focus:ring-transparent dark:border-[#17263c] dark:bg-slate-800 dark:text-slate-50 dark:focus:border-primary ps-10 placeholder:text-slate-700 dark:placeholder:text-slate-400"
+                    />
+                    <span className="absolute start-4 top-1/2 -translate-y-1/2">
+                      <Mail size={16} />
+                    </span>
+                  </div>
+                  <button
+                    type="submit"
+                    className="relative flex items-center bg-orange-500 hover:bg-gradient-to-r hover:from-orange-500 hover:to-orange-600 justify-center rounded-md px-5 py-2 font-semibold outline-none transition duration-300 hover:shadow-none text-white !mt-6 w-full border-0 shadow-[0_10px_20px_-10px_rgba(249,115,22,1)]"
+                    disabled={isLoading} 
+                  >
+                    {isLoading ? (
+                      <>
+                        <SpinnerIcon className="w-4 h-4 me-3 text-white" />
+                        Sending...
+                      </>
+                    ) : (
+                      "Send"
+                    )}
+                  </button>
                 </div>
               </form>
             </div>
