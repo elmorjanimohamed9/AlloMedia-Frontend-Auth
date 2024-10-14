@@ -40,8 +40,7 @@ const RoleSelection = () => {
                 <label
                   className={`relative flex flex-col items-center p-4 border rounded-lg cursor-pointer ${
                     selectedRole === "client" ? "border-orange-500 border-2" : "border-slate-600"
-                  } bg-white dark:bg-slate-800 text-orange-500 h-40`}
-                >
+                  } bg-white dark:bg-slate-800 text-orange-500 h-40`}>
                   <input
                     type="radio"
                     name="role"
