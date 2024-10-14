@@ -22,11 +22,8 @@ describe('RoleSelection Component', () => {
     const submitButton = screen.getByRole('button', { name: /create account/i });
     expect(submitButton).not.toBeDisabled();
 
-    // Simulate form submission
     fireEvent.click(submitButton);
 
-    // Optionally, you can check for loading state or navigation
-    // For example, check if the loading spinner appears
     expect(screen.getByText(/creating account.../i)).toBeInTheDocument();
   });
 });
