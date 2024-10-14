@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom'; 
 import NotFoundImage from "../assets/img/404.svg";
 
-
 const NotFound = () => {
   return (
     <div className="relative flex min-h-screen items-center justify-center bg-slate-50 dark:bg-slate-900 backdrop-blur-lg px-6 py-10 sm:px-16">
