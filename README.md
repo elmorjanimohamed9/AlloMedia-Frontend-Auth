@@ -44,13 +44,20 @@ Here are images showing the application in both light and dark modes on web and 
 
 ### Mobile
 
-- **Light Mode:**
-
-  ![Mobile Light Mode](document/img/mobile-light.png)
-
-- **Dark Mode:**
-
-  ![Mobile Dark Mode](document/img/mobile-dark.png)
+<div align="center">
+  <table style="border: none;">
+    <tr>
+      <td style="border: none; text-align: center;">
+        <h4>Light Mode</h4>
+        <img src="document/img/mobile-light.png" alt="Mobile Light Mode" width="200">
+      </td>
+      <td style="border: none; text-align: center;">
+        <h4>Dark Mode</h4>
+        <img src="document/img/mobile-dark.png" alt="Mobile Dark Mode" width="200">
+      </td>
+    </tr>
+  </table>
+</div>
 
 ## Prerequisites
 
