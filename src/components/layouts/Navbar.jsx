@@ -103,7 +103,7 @@ const Navbar = () => {
               Sign In
             </a>
             <a
-              href="/auth/register"
+              href="/auth/role-selection"
               className="text-white font-medium bg-orange-500 hover:bg-gradient-to-r hover:from-orange-500 hover:to-orange-600 transition-colors duration-300 py-2 px-3 rounded-md dark:border-slate-700"
             >
               Create an account
