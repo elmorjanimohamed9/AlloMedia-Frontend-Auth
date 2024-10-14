@@ -18,11 +18,14 @@ const Navbar = () => {
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 0);
+      if (mobileDrawerOpen) {
+        setMobileDrawerOpen(false);
+      }
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [mobileDrawerOpen]);
 
   const toggleNavbar = () => {
     setMobileDrawerOpen(!mobileDrawerOpen);
@@ -130,8 +133,14 @@ const Navbar = () => {
           </div>
         </div>
         {mobileDrawerOpen && (
-          <div className="fixed inset-0 z-20 text-white bg-neutral-900 p-12 flex flex-col justify-center items-center lg:hidden">
-            <ul className="space-y-4">
+          <div className="fixed inset-0 z-20 text-white bg-slate-50 dark:bg-slate-900 p-12 flex flex-col justify-center items-center lg:hidden">
+            <button
+              onClick={toggleNavbar}
+              className="absolute top-4 right-4 text-slate-900 dark:text-slate-50"
+            >
+              <X size="24" />
+            </button>
+            <ul className="space-y-4 mt-8 text-slate-900 dark:text-slate-50">
               <li>
                 <a
                   href=""
@@ -176,13 +185,13 @@ const Navbar = () => {
             <div className="flex space-x-6 mt-8">
               <a
                 href="/auth/login"
-                className="py-2 px-3 border rounded-md text-white hover:bg-orange-500 transition-colors duration-300"
+                className="py-1 px-2 border rounded-md text-slate-900 dark:text-slate-50 hover:text-slate-50 hover:bg-gradient-to-r hover:from-orange-500 hover:to-orange-600 transition-colors duration-300"
               >
                 Sign In
               </a>
               <a
                 href="/auth/role-selection"
-                className="py-2 px-3 text-white rounded-md bg-gradient-to-r from-orange-500 to-orange-800 hover:from-orange-600 hover:to-orange-900 transition-colors duration-300"
+                className="py-1 px-2 text-white rounded-md bg-orange-500 hover:bg-gradient-to-r hover:from-orange-500 hover:to-orange-600 transition-colors duration-300"
               >
                 Create an account
               </a>
