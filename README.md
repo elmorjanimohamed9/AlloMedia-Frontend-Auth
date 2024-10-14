@@ -44,21 +44,6 @@ Here are images showing the application in both light and dark modes on web and 
 
 ### Mobile
 
-<div align="center">
-  <table style="border: none;">
-    <tr>
-      <td style="border: none; text-align: center;">
-        <h4>Light Mode</h4>
-        <img src="document/img/mobile-light.png" alt="Mobile Light Mode" width="200">
-      </td>
-      <td style="border: none; text-align: center;">
-        <h4>Dark Mode</h4>
-        <img src="document/img/mobile-dark.png" alt="Mobile Dark Mode" width="200">
-      </td>
-    </tr>
-  </table>
-</div>
-
 ## Prerequisites
 
 - Node.js (version 20 or higher)
